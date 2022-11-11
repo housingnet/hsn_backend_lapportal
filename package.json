@@ -1,0 +1,17 @@
+{
+  "name": "dev-uconnex",
+  "version": "1.0.0",
+  "description": "This is example of application for uconnex development stage",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hendra",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
