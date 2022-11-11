@@ -1,13 +1,16 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+import mongoDB from "./src/config/connection";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+// Database connection
+mongoDB();
+
 app.get("/", (req, res) => {
-  res.send("Hello World!");
-  console.log("test");
+  res.send("Server is running!");
 });
 
 app.listen(PORT, (error) => {
