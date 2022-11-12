@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const mongoClient = async () => {
   try {
-    const mongoUrl = process.env.a;
+    const mongoUrl = process.env.DATABASE_URL;
     if (!mongoUrl) {
       return console.log(
-        "Please add mongoDB connection in env variable MONGO_CLIENT"
+        "Please add mongoDB connection in env variable DATABASE_URL"
       );
     }
     const con = await mongoose.connect(mongoUrl, {
