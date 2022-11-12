@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express, { urlencoded } from "express";
 import mongoDB from "./src/config/connection.js";
-import { createUser } from "./src/model/users/userModel.js";
+import { createUser, getUser } from "./src/model/users/userModel.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -14,7 +14,30 @@ mongoDB();
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
-app.post("/", async (req, res, next) => {
+app.post("/login", async (req, res) => {
+  try {
+    const result = await getUser(req.body.email);
+    if (result._id && result.password == req.body.password) {
+      return res.json({
+        status: "success",
+        message: "Login success!",
+      });
+    } else {
+      return res.json({
+        status: "success",
+        message: "Login failed!",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      status: "error",
+      message: "Internal server error",
+    });
+  }
+});
+
+app.post("/register", async (req, res, next) => {
   try {
     console.log(req.body);
     const user = await createUser(req.body);

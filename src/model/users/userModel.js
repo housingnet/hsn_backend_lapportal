@@ -9,3 +9,8 @@ export const createUser = (obj) => {
 export const fetchUser = () => {
   return userSchema.find();
 };
+
+//find user by email
+export const getUser = (email) => {
+  return userSchema.findOne({ email });
+};

@@ -94,12 +94,21 @@ Content-Type: application/json
    
 }
 
-### Test for dev-uconnex
-POST http://localhost:8000/
+### Test for dev-uconnex REGISTER
+POST http://localhost:8000/register
 Content-Type: application/json
 
 {
     "name" : "hendra1",
-    "email" : "hendra1.here@yahoo.com",
+    "email" : "hendra2.here@yahoo.com",
+    "password" : "test123"
+}
+
+### Test for dev-uconnex LOGIN
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+    "email" : "hendra2.here@yahoo.com",
     "password" : "test123"
 }
