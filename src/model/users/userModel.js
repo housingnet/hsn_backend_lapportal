@@ -4,3 +4,8 @@ import userSchema from "./userSchema.js";
 export const createUser = (obj) => {
   return userSchema(obj).save();
 };
+
+//Fetch User
+export const fetchUser = () => {
+  return userSchema.find();
+};

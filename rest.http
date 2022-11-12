@@ -1,0 +1,95 @@
+//User API----------------------------------------------------------------------------------
+### Create user
+
+POST http://localhost:8000/api/v1/user
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmRyYS5oZXJlQHlhaG9vLmNvbSIsImlhdCI6MTY0MjkwMDMyOCwiZXhwIjoxNjQyOTg2NzI4fQ.3F8q1KVbcDvVPGJioM2-dVoClhkNJnUyECIEGpbb0WE
+
+{
+    "name" : "Mimi Agustina",
+    "email" : "mimi@yahoo.com",
+    "password" : "mimi1234"
+}
+
+### Update user role and status
+PATCH http://localhost:8000/api/v1/user
+Content-Type: application/json
+
+{
+    "userName" : "skaiterskull",
+    "role" : "admin",
+    "isActive" : false
+}
+
+### get user by email
+POST http://localhost:8000/api/v1/login
+Content-Type: application/json
+
+{
+    "email" : "hendra.here@yahoo.com",
+    "password" : "hendra123"
+}
+
+### get category in asc by name
+GET http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+### get category by slug
+GET  http://localhost:8000/api/v1/category/add-on
+Content-Type: application/json
+
+### Update category
+PATCH http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+{
+    "_id" : "62aea4b56da672682cd8fae5",
+    "title" : "hendra1",
+    "description" : "dsadsadsad"
+}
+
+
+
+
+### get all product
+POST   http://localhost:8000/api/v1/product
+Content-Type: application/json
+
+{
+    "sku" : "pro001",
+    "title": "Cheese",
+    "buyPrice": 30,
+    "sellPrice": 50,
+    "supplier": ["123"],
+    "category": ["234"],
+    "createdBy" : "Hendra",
+    "description" : "THis is cheese"
+}
+
+### add product
+POST https://mimi-inventory-app.herokuapp.com/api/v1/product
+Content-Type: application/json
+
+{
+    "sku" : "pro004",
+    "title": "Cheese",
+    "buyPrice": 30,
+    "sellPrice": 50,
+    "supplier": ["123"],
+    "category": ["234"],
+    "createdBy" : "Hendra",
+    "description" : "THis is cheese"
+}
+
+
+
+
+### Test for dev-uconnex
+POST https://dev-uconnex.azurewebsites.net/
+Content-Type: application/json
+
+{
+    "name" : "hendra1",
+    "email" : "hendra1.here@yahoo.com"
+   
+}
