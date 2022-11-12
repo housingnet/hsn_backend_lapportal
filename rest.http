@@ -90,6 +90,16 @@ Content-Type: application/json
 
 {
     "name" : "hendra1",
-    "email" : "hendra1.here@yahoo.com"
+    "email" : "hendra5.here@yahoo.com"
    
+}
+
+### Test for dev-uconnex
+POST http://localhost:8000/
+Content-Type: application/json
+
+{
+    "name" : "hendra1",
+    "email" : "hendra1.here@yahoo.com",
+    "password" : "test123"
 }

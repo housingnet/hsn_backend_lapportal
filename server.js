@@ -35,25 +35,6 @@ app.post("/", async (req, res, next) => {
     }
     next(error);
   }
-
-  // try {
-  //   const result = await fetchUser();
-
-  //   if (result.length) {
-  //     return res.json({
-  //       status: "success",
-  //       result,
-  //     });
-  //   }
-
-  //   res.json({ status: "error", message: "user not found" });
-  // } catch (error) {
-  //   if (error) {
-  //     error.status = 500;
-  //     error.message = "Internal server error";
-  //   }
-  //   next(error);
-  // }
 });
 
 app.listen(PORT, (error) => {
