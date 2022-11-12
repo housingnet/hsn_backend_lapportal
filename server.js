@@ -24,7 +24,7 @@ app.post("/login", async (req, res) => {
       });
     } else {
       return res.json({
-        status: "success",
+        status: "error",
         message: "Login failed!",
       });
     }
