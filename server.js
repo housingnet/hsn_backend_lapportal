@@ -3,7 +3,8 @@ dotenv.config();
 import express, { urlencoded } from "express";
 import mongoDB from "./src/config/connection.js";
 import { createUser, getUser } from "./src/model/users/userModel.js";
-import sql from "mssql/msnodesqlv8.js";
+// import sql from "mssql/msnodesqlv8.js";
+import sql from "mssql";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -27,7 +28,7 @@ app.get("/test", async (req, res) => {
       },
       database: "u-connex-database",
       server: "sqlserver-uconnex.database.windows.net",
-      driver: "msnodesqlv8",
+      // driver: "msnodesqlv8",
       options: {
         // trustedConnection: true,
         encrypt: true,
