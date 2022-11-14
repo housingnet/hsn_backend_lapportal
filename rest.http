@@ -85,12 +85,13 @@ Content-Type: application/json
 
 
 ### Test for dev-uconnex
-POST https://dev-uconnex.azurewebsites.net/
+POST https://dev-uconnex.azurewebsites.net/register
 Content-Type: application/json
 
 {
-    "name" : "hendra1",
-    "email" : "hendra5.here@yahoo.com"
+    "name" : "Hendra Wijaya",
+    "email" : "hw1@gmail.com",
+    "password" : "test12"
    
 }
 
@@ -105,10 +106,10 @@ Content-Type: application/json
 }
 
 ### Test for dev-uconnex LOGIN
-POST http://localhost:8000/login
+GET  http://localhost:8000/test
 Content-Type: application/json
 
-{
-    "email" : "hendra2.here@yahoo.com",
-    "password" : "test123"
-}
+# {
+#     "email" : "hendra2.here@yahoo.com",
+#     "password" : "test123"
+# }
