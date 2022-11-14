@@ -85,15 +85,15 @@ Content-Type: application/json
 
 
 ### Test for dev-uconnex
-GET https://dev-uconnex.azurewebsites.net/test
+POST https://dev-uconnex.azurewebsites.net/login
 Content-Type: application/json
 
-# {
-#     "name" : "Hendra Wijaya",
-#     "email" : "hw1@gmail.com",
-#     "password" : "test12"
+{
+    "name" : "Hendra Wijaya",
+    "email" : "hw1@gmail.com",
+    "password" : "test12"
    
-# }
+}
 
 ### Test for dev-uconnex REGISTER
 POST http://localhost:8000/register

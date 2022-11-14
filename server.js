@@ -30,20 +30,29 @@ app.get("/test", async (req, res) => {
       driver: "msnodesqlv8",
       options: {
         // trustedConnection: true,
+        encrypt: true,
       },
     });
 
-    pool.connect().then(() => {
-      //simple query
-      pool.request().query("Select * from persons", (err, result) => {
-        console.dir(result.recordset);
-        sql.close();
+    pool
+      .connect()
+      .then(() => {
+        //simple query
+        pool.request().query("Select * from persons ", (err, result) => {
+          console.dir(result.recordset);
+          sql.close();
+          return res.json({
+            status: "success",
+            message: result.recordset,
+          });
+        });
+      })
+      .catch((error) => {
         return res.json({
-          status: "success",
-          message: result.recordset,
+          status: "error",
+          message: error.message,
         });
       });
-    });
   } catch (error) {
     console.log(error);
     return res.json({
@@ -73,22 +82,30 @@ app.get("/test", async (req, res) => {
 //       },
 //     });
 
-//     pool.connect().then(() => {
-//       //simple query
-//       pool.request().query("Select * from persons ", (err, result) => {
-//         console.dir(result.recordset);
-//         sql.close();
+//     pool
+//       .connect()
+//       .then(() => {
+//         //simple query
+//         pool.request().query("Select * from persons ", (err, result) => {
+//           console.dir(result.recordset);
+//           sql.close();
+//           return res.json({
+//             status: "success",
+//             message: result.recordset,
+//           });
+//         });
+//       })
+//       .catch((error) => {
 //         return res.json({
-//           status: "success",
-//           message: result.recordset,
+//           status: "error",
+//           message: error.message,
 //         });
 //       });
-//     });
 //   } catch (error) {
 //     console.log(error);
 //     return res.json({
 //       status: "error",
-//       message: "Internal server error",
+//       message: error.message,
 //     });
 //   }
 // });
