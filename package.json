@@ -16,6 +16,7 @@
     "mongoose": "^6.7.2",
     "msnodesqlv8": "^2.7.0",
     "mssql": "^9.0.1",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "tedious": "^15.1.1"
   }
 }
