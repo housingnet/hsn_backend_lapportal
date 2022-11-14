@@ -4,7 +4,6 @@ import express, { urlencoded } from "express";
 import mongoDB from "./src/config/connection.js";
 import { createUser, getUser } from "./src/model/users/userModel.js";
 import sql from "mssql/msnodesqlv8.js";
-import { Connection, Request } from "tedious";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -18,7 +17,7 @@ app.use(urlencoded({ extended: true }));
 
 app.get("/test", async (req, res) => {
   try {
-    const config = {
+    const pool = new sql.ConnectionPool({
       authentication: {
         options: {
           userName: "hendra.w", // update me
@@ -26,58 +25,59 @@ app.get("/test", async (req, res) => {
         },
         type: "default",
       },
-      server: "sqlserver-uconnex.database.windows.net", // update me
+      database: "u-connex-database",
+      server: "sqlserver-uconnex.database.windows.net",
+      driver: "msnodesqlv8",
       options: {
-        database: "u-connex-database", //update me
-        encrypt: true,
+        // trustedConnection: true,
       },
-    };
-    const connection = new Connection(config);
-    connection.on("connect", (err) => {
-      if (err) {
-        res.json({
-          message: err.message,
-        });
-      } else {
-        res.json({
-          message: "Database connecteed",
-        });
-      }
-      connection.close();
     });
 
-    connection.connect();
+    pool.connect().then(() => {
+      //simple query
+      pool.request().query("Select * from persons", (err, result) => {
+        console.dir(result.recordset);
+        sql.close();
+        return res.json({
+          status: "success",
+          message: result.recordset,
+        });
+      });
+    });
   } catch (error) {
     console.log(error);
     return res.json({
       status: "error",
-      message: "Internal server error",
+      message: error.message,
     });
   }
 });
 
+// WORKING CODE FOR LOCALHOST
+
 // app.get("/test", async (req, res) => {
 //   try {
 //     const pool = new sql.ConnectionPool({
-//       authentication: {
-//         options: {
-//           userName: "hendra.w", // update me
-//           password: "hsn@dev2021", // update me
-//         },
-//         type: "default",
-//       },
-//       server: "sqlserver-uconnex.database.windows.net", // update me
+//       // authentication: {
+//       //   options: {
+//       //     userName: "hendra.w", // update me
+//       //     password: "hsn@dev2021", // update me
+//       //   },
+//       //   type: "default",
+//       // },
+//       database: "u-connex",
+//       server: "LAPTOP-2QGJN5N7",
+//       driver: "msnodesqlv8",
 //       options: {
-//         database: "u-connex-database", //update me
-//         encrypt: true,
+//         trustedConnection: true,
 //       },
-//       port: 8080,
 //     });
 
 //     pool.connect().then(() => {
 //       //simple query
-//       pool.request().query("Select * from  ", (err, result) => {
+//       pool.request().query("Select * from persons ", (err, result) => {
 //         console.dir(result.recordset);
+//         sql.close();
 //         return res.json({
 //           status: "success",
 //           message: result.recordset,
