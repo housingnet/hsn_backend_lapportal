@@ -30,6 +30,7 @@ app.get("/test", async (req, res) => {
         database: "u-connex-database", //update me
         encrypt: true,
       },
+      port: 8080,
     });
 
     pool.connect().then(() => {
