@@ -12,3 +12,15 @@ Content-Type: application/json
     "mobileNumber" : "12345678"
 }
 
+###create user
+
+POST https://dev-uconnex.azurewebsites.net/add-user
+Content-Type: application/json
+
+{   
+    "email" : "hendra3@gmail.com",
+    "firstName" : "Hendra",
+    "lastName" : "Wijaya",
+    "address" : "Sydney",
+    "mobileNumber" : "12345678"
+}
