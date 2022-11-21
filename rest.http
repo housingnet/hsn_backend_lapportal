@@ -14,13 +14,10 @@ Content-Type: application/json
 
 ###create user
 
-POST https://dev-uconnex.azurewebsites.net/add-user
+POST https://dev-uconnex.azurewebsites.net/get-user
 Content-Type: application/json
 
 {   
-    "email" : "hendra3@gmail.com",
-    "firstName" : "Hendra",
-    "lastName" : "Wijaya",
-    "address" : "Sydney",
-    "mobileNumber" : "12345678"
+    "email" : "hendra3@gmail.com"
+
 }

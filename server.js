@@ -135,7 +135,7 @@ app.post("/update-user", async (req, res) => {
         pool
           .request()
           .query(
-            `UPDATE Users SET FirstName = '${req.body.firstName}', LastName = '${req.body.lastName}', Address = '${req.body.address}', MobileNumber = '${req.body.mobileNumber}' WHERE Email = ${req.body.email}`,
+            `UPDATE Users SET FirstName = '${req.body.firstName}', LastName = '${req.body.lastName}', Address = '${req.body.address}', MobileNumber = '${req.body.mobileNumber}' WHERE Email = '${req.body.email}'`,
             (err, result) => {
               sql.close();
               return res.json({
