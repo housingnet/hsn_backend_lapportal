@@ -83,7 +83,7 @@ app.post("/get-user", async (req, res) => {
         pool
           .request()
           .query(
-            `SELECT * FROM person WHERE email='${req.body.email}'`,
+            `SELECT * FROM Persons WHERE email='${req.body.email}'`,
             (err, result) => {
               sql.close();
               return res.json({
