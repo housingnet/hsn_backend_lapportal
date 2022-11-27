@@ -17,6 +17,6 @@ POST https://housingnet-backend.azurewebsites.net/get-user
 Content-Type: application/json
 
 {   
-    "email" : 2
+    "email" : 1
 
 }
