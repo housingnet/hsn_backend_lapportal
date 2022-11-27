@@ -13,11 +13,10 @@ Content-Type: application/json
 }
 
 ###create user
-
-POST https://dev-uconnex.azurewebsites.net/get-user
+POST https://housingnet-backend.azurewebsites.net/get-user
 Content-Type: application/json
 
 {   
-    "email" : "hendra3@gmail.com"
+    "email" : 2
 
 }
