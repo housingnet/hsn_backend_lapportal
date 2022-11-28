@@ -1,22 +1,26 @@
 //User API----------------------------------------------------------------------------------
 ### Create user
 
-POST http://localhost:8000/add-user
+POST http://localhost:8000/get-user
 Content-Type: application/json
 
 {   
-    "email" : "hendra@gmail.com",
+    "email" : "hendra2@gmail.com",
+    "firstName" : "Hendra2",
+    "lastName" : "Wijaya2",
+    "address" : "Sydney2",
+    "mobileNumber" : "123456782"
+}
+
+###create user
+POST https://housingnet-backend.azurewebsites.net/user
+Content-Type: application/json
+
+{   
+         "email" : "hendra.here@gmail.com",
     "firstName" : "Hendra",
     "lastName" : "Wijaya",
     "address" : "Sydney",
     "mobileNumber" : "12345678"
 }
 
-###create user
-POST https://housingnet-backend.azurewebsites.net/get-user
-Content-Type: application/json
-
-{   
-    "email" : 1
-
-}

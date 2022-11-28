@@ -24,7 +24,9 @@ app.post("/user", async (req, res) => {
       database: process.env.DATABASE_NAME,
       server: process.env.DATABASE_SERVER,
       options: {
-        encrypt: true,
+        encrypt: process.env.NODE_ENV == "production" ? true : false,
+        trustServerCertificate:
+          process.env.NODE_ENV == "production" ? false : true,
       },
     });
 
@@ -40,7 +42,6 @@ app.post("/user", async (req, res) => {
               sql.close();
               return res.json({
                 status: "success",
-                message: result.recordset,
               });
             }
           );
@@ -74,7 +75,9 @@ app.post("/get-user", async (req, res) => {
       database: process.env.DATABASE_NAME,
       server: process.env.DATABASE_SERVER,
       options: {
-        encrypt: true,
+        encrypt: process.env.NODE_ENV == "production" ? true : false,
+        trustServerCertificate:
+          process.env.NODE_ENV == "production" ? false : true,
       },
     });
 
@@ -124,7 +127,9 @@ app.post("/update-user", async (req, res) => {
       database: process.env.DATABASE_NAME,
       server: process.env.DATABASE_SERVER,
       options: {
-        encrypt: true,
+        encrypt: process.env.NODE_ENV == "production" ? true : false,
+        trustServerCertificate:
+          process.env.NODE_ENV == "production" ? false : true,
       },
     });
 
