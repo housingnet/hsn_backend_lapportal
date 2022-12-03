@@ -3,19 +3,20 @@ import sql from "mssql";
 
 const Router = express.Router();
 
+// add user to database
 Router.post("/add", async (req, res) => {
   try {
     const result =
-      await sql.query`INSERT INTO Services (Title, Description, Owner_Email) VALUES (${req.body.title}, ${req.body.description}, ${req.body.owner_email})`;
+      await sql.query`INSERT INTO Users (Email, FirstName, LastName, Address, MobileNumber) VALUES (${req.body.email}, ${req.body.firstName}, ${req.body.lastName}, ${req.body.address}, ${req.body.mobileNumber})`;
     if (result.rowsAffected == 1) {
       res.json({
         status: "success",
-        message: "Service has been added!",
+        message: "User has been added!",
       });
     } else {
       res.json({
         status: "error",
-        message: "Service has not been added!",
+        message: "Something went wrong, please try again!",
       });
     }
   } catch (error) {
@@ -30,10 +31,9 @@ Router.post("/add", async (req, res) => {
 Router.post("/get", async (req, res) => {
   const { email } = req.body;
   try {
-    const result =
-      await sql.query`SELECT * FROM Services WHERE owner_email=${email}`;
+    const result = await sql.query`SELECT * FROM Users WHERE email=${email}`;
     console.log(result);
-    if (result.recordset.length !== 0) {
+    if (result) {
       res.json({
         status: "success",
         message: result.recordset,
@@ -53,10 +53,11 @@ Router.post("/get", async (req, res) => {
   }
 });
 
+//update user
 Router.post("/update", async (req, res) => {
   try {
     const result =
-      await sql.query`UPDATE Services SET Title = ${req.body.title}, Description = ${req.body.description} WHERE ID = ${req.body.id}`;
+      await sql.query`UPDATE Users SET FirstName = ${req.body.firstName}, LastName = ${req.body.lastName}, Address = ${req.body.address}, MobileNumber = ${req.body.mobileNumber} WHERE Email = ${req.body.email}`;
     if (result.rowsAffected == 1) {
       return res.json({
         status: "success",
