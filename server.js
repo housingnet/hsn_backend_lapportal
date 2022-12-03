@@ -5,8 +5,11 @@ import helmet from "helmet";
 import cors from "cors";
 import sql from "mssql";
 import serviceRouter from "./src/routers/serviceRoute.js";
+import dbConnect from "./src/config/dbConnect.js";
 const app = express();
 const PORT = process.env.PORT || 8000;
+
+dbConnect();
 
 //middleswares
 app.use(express.json());
@@ -68,48 +71,68 @@ app.post("/user", async (req, res) => {
 });
 
 //get single user
-app.post("/get-user", async (req, res) => {
-  try {
-    const pool = new sql.ConnectionPool({
-      authentication: {
-        options: {
-          userName: process.env.DATABASE_USERNAME,
-          password: process.env.DATABASE_PASSWORD,
-        },
-        type: "default",
-      },
-      database: process.env.DATABASE_NAME,
-      server: process.env.DATABASE_SERVER,
-      options: {
-        encrypt: process.env.NODE_ENV == "production" ? true : false,
-        trustServerCertificate:
-          process.env.NODE_ENV == "production" ? false : true,
-      },
-    });
+// app.post("/get-user", async (req, res) => {
+//   try {
+//     const pool = new sql.ConnectionPool({
+//       authentication: {
+//         options: {
+//           userName: process.env.DATABASE_USERNAME,
+//           password: process.env.DATABASE_PASSWORD,
+//         },
+//         type: "default",
+//       },
+//       database: process.env.DATABASE_NAME,
+//       server: process.env.DATABASE_SERVER,
+//       options: {
+//         encrypt: process.env.NODE_ENV == "production" ? true : false,
+//         trustServerCertificate:
+//           process.env.NODE_ENV == "production" ? false : true,
+//       },
+//     });
 
-    pool
-      .connect()
-      .then(() => {
-        //simple query
-        pool
-          .request()
-          .query(
-            `SELECT * FROM Users WHERE email='${req.body.email}'`,
-            (err, result) => {
-              sql.close();
-              return res.json({
-                status: "success",
-                message: result.recordset,
-              });
-            }
-          );
-      })
-      .catch((error) => {
-        return res.json({
-          status: "error",
-          message: error.message,
-        });
+//     pool
+//       .connect()
+//       .then(() => {
+//         //simple query
+//         pool
+//           .request()
+//           .query(
+//             `SELECT * FROM Users WHERE email='${req.body.email}'`,
+//             (err, result) => {
+//               sql.close();
+//               return res.json({
+//                 status: "success",
+//                 message: result.recordset,
+//               });
+//             }
+//           );
+//       })
+//       .catch((error) => {
+//         return res.json({
+//           status: "error",
+//           message: error.message,
+//         });
+//       });
+//   } catch (error) {
+//     console.log(error);
+//     return res.json({
+//       status: "error",
+//       message: error.message,
+//     });
+//   }
+// });
+
+app.post("/get-user", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const result = await sql.query`SELECT * FROM Users WHERE email=${email}`;
+    console.log(result, "dasds");
+    if (result.recordset.length !== 0) {
+      res.json({
+        status: "success",
+        message: result.recordset,
       });
+    }
   } catch (error) {
     console.log(error);
     return res.json({
